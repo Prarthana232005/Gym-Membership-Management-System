@@ -85,6 +85,10 @@ class Member {
         return name;
     }
 
+    int getAge() {
+        return age;
+    }
+
     boolean hasPlan() {
         return plan != null;
     }
@@ -102,6 +106,7 @@ class Member {
         if (expiryDate.isBefore(LocalDate.now())) {
             expiryDate = LocalDate.now();
         }
+
         expiryDate = expiryDate.plusMonths(plan.getDuration());
     }
 
@@ -146,7 +151,6 @@ class GymManager {
     ArrayList<Trainer> trainers = new ArrayList<>();
     HashMap<Integer, String> trainerAssignments = new HashMap<>();
 
-    // Node for our own linked list
     class Node {
         String data;
         Node next;
@@ -160,6 +164,11 @@ class GymManager {
     Node head = null;
 
     void addMember(Member member) {
+        if (member.getAge() < 18) {
+            System.out.println("Member must be at least 18 years old!");
+            return;
+        }
+
         for (Member m : members) {
             if (m.getId() == member.getId()) {
                 System.out.println("Member ID already exists!");
@@ -297,7 +306,7 @@ class GymManager {
 
     void allotTrainer(int memberId, int trainerId)
             throws MemberNotFoundException {
-        Member m = searchMember(memberId);
+        searchMember(memberId);
 
         for (Trainer t : trainers) {
             if (t.getId() == trainerId) {
