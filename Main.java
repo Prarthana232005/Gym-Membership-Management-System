@@ -183,11 +183,12 @@ class GymManager {
     Member searchMember(int id) throws MemberNotFoundException {
         for (Member m : members) {
             if (m.getId() == id) {
+                System.out.println("Member found successfully!");
                 return m;
             }
         }
 
-        throw new MemberNotFoundException("Member not found!");
+        throw new MemberNotFoundException("Member ID " + id + " not found!");
     }
 
     void viewMembers() {
