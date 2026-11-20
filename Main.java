@@ -89,6 +89,10 @@ class Member {
         return age;
     }
 
+    String getPhone() {
+        return phone;
+    }
+
     boolean hasPlan() {
         return plan != null;
     }
@@ -166,6 +170,11 @@ class GymManager {
     void addMember(Member member) {
         if (member.getAge() < 18) {
             System.out.println("Member must be at least 18 years old!");
+            return;
+        }
+
+        if (!member.getPhone().matches("[0-9]{10}")) {
+            System.out.println("Phone number must contain exactly 10 digits!");
             return;
         }
 
